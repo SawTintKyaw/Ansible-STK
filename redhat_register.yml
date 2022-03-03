@@ -1,0 +1,12 @@
+---
+- name: Play to register RedHat OS
+  hosts: all
+  vars_files:
+    - vars/redhatpw.yml
+  tasks:
+    - name: Register and subscribe the system
+      redhat_subscription:
+        username: "{{ username }}"
+        password: "{{ password }}"
+        pool_ids: 8a85f99e7e6edc0b017e7be6c57569bf
+        state: present

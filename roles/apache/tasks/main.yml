@@ -1,0 +1,35 @@
+---
+# tasks file for apache
+- name: Ensure httpd,firewalld installed
+  yum:
+    name:
+      - httpd
+      - firewalld
+    state: present
+
+- name: Ensure httpd,firewalld enabled and started
+  service:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  loop:
+    - httpd
+    - firewalld
+
+- name: Ensure firewall is enabled with a rule to allow access to the web server
+  firewalld:
+    service: http
+    immediate: yes
+    permanent: yes
+    state: enabled
+
+- name: Create index.html from jinja2 template
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    mode: 0644
+    owner: root
+    group: root
+    setype: httpd_sys_content_t
+
+

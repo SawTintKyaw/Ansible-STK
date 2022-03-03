@@ -1,0 +1,13 @@
+---
+- name: Play to install haproxy on balancers groupa
+  hosts: loadbalancers
+  pre_tasks:
+    - firewalld:
+        service: http
+        state: enabled
+        immediate: yes
+        permanent: yes
+
+  roles:
+    - role: geerlingguy.haproxy
+

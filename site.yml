@@ -1,0 +1,11 @@
+---
+- name: "Play to provision servers : including web_servers & haproxy servers"
+  hosts: all
+  tasks:
+    - name: "include task apache_role.yml" 
+      include_tasks: apache_role.yml
+      when: inventory_hostname in groups['web_servers']
+    
+#    - name: "include task balancers.yml"
+#      include_tasks: balancers.yml
+#      when: inventory_hostname in groups['loadbalancers']
