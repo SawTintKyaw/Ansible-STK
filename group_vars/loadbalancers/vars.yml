@@ -1,6 +1,0 @@
----
-haproxy_backend_servers:
-  - name: webserver1.example.com
-    address: 192.168.60.4:80
-  - name: webserver2.example.com
-    address: 192.168.60.5:80
